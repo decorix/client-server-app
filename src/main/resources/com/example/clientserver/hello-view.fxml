@@ -8,9 +8,9 @@
    <children>
       <AnchorPane layoutX="-5.0" layoutY="111.0" prefHeight="289.0" prefWidth="706.0" style="-fx-background-color: #fafafa;">
          <children>
-            <TextField fx:id="inputLogin" layoutX="219.0" layoutY="64.0" prefHeight="35.0" prefWidth="268.0" promptText="Login" />
+            <TextField fx:id="inputLogin" layoutX="219.0" layoutY="64.0" prefHeight="35.0" prefWidth="268.0" promptText="E-mail" />
             <PasswordField fx:id="inputPassword" layoutX="219.0" layoutY="120.0" prefHeight="35.0" prefWidth="268.0" promptText="Password" />
-            <Label layoutX="284.0" layoutY="14.0" prefHeight="35.0" prefWidth="138.0" text="Авторизация">
+            <Label layoutX="284.0" layoutY="14.0" prefHeight="35.0" prefWidth="138.0" text="Authorization">
                <font>
                   <Font name="Berlin Sans FB" size="23.0" />
                </font>

@@ -32,6 +32,8 @@ public class Controller {
         Register.setOnAction(event ->  {
             System.out.println("Please, register!");
         });
+
+        //Register.setOnAction();
     }
 
 }
