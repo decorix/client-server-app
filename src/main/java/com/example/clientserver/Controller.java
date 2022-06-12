@@ -36,6 +36,17 @@ public class Controller {
 
     @FXML
     void initialize() {
+        LoginInAcc.setOnAction(event -> {
+        String loginText = inputLogin.getText().trim();
+        String loginPassword = inputPassword.getText().trim();
+
+        if (!loginText.equals("") && !loginPassword.equals("")){
+            loginUser(loginText, loginPassword);
+        }else {
+            System.out.println("Error");
+        }
+        });
+
         Register.setOnAction(event -> {
 
             Register.getScene().getWindow().hide();
@@ -55,6 +66,9 @@ public class Controller {
         });
 
 
+    }
+
+    private void loginUser(String loginText, String loginPassword) {
     }
 
 }

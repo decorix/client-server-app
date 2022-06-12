@@ -30,6 +30,12 @@
                   <Font name="Berlin Sans FB" size="15.0" />
                </font>
             </Button>
+            <MenuButton mnemonicParsing="false" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
          </children>
       </AnchorPane>
       <Label layoutX="219.0" prefHeight="105.0" prefWidth="262.0" text="Client-server app" textFill="WHITE">

@@ -44,18 +44,23 @@ public class ControllerRegistration {
 
     @FXML
     void initialize() {
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        Register.setOnAction(event -> {
+            dbHandler.signUpUser(email.getText(), nickname.getText(), groupnumber.getText(), inputPassword.getText(), inputPasswordAgain.getText());
+        });
+
         BackMenu.setOnAction(event -> {
 
             BackMenu.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("hello-view.fxml"));
-
             try {
                 loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             Parent root = loader.getRoot();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
