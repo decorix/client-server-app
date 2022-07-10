@@ -44,28 +44,43 @@ public class ControllerRegistration {
 
     @FXML
     void initialize() {
-        DatabaseHandler dbHandler = new DatabaseHandler();
         Register.setOnAction(event -> {
-            dbHandler.signUpUser(email.getText(), nickname.getText(), groupnumber.getText(), inputPassword.getText(), inputPasswordAgain.getText());
+            signUpNewUser();
         });
 
-        BackMenu.setOnAction(event -> {
+         BackMenu.setOnAction(event -> {
 
             BackMenu.getScene().getWindow().hide();
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("hello-view.fxml"));
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+             FXMLLoader loader = new FXMLLoader();
+             loader.setLocation(getClass().getResource("hello-view.fxml"));
+             try {
+                 loader.load();
+             } catch (IOException e) {
+                 e.printStackTrace();
+             }
 
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+             Parent root = loader.getRoot();
+             Stage stage = new Stage();
+             stage.setScene(new Scene(root));
+             stage.showAndWait();
         });
+    }
+
+    private void signUpNewUser() {
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        String USER_EMAIL = email.getText();
+        String USER_PASSWORD = inputPassword.getText();
+        String USER_NICKNAME = nickname.getText();
+        String USER_GROUPNUMBER = groupnumber.getText();
+        String USER_PASSWORDAGAIN = inputPasswordAgain.getText();
+        String USER_STATUS = "User";
+
+        User user = new User(USER_EMAIL, USER_NICKNAME, USER_GROUPNUMBER, USER_PASSWORD, USER_PASSWORDAGAIN, USER_STATUS);
+
+
+        dbHandler.signUpUser(user);
+
     }
 
 }

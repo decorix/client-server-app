@@ -8,7 +8,7 @@
     <children>
         <AnchorPane layoutX="-5.0" layoutY="111.0" prefHeight="289.0" prefWidth="706.0" style="-fx-background-color: #fafafa;">
             <children>
-                <Button fx:id="NewsForUser" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" text="News">
+                <Button fx:id="NewsForUser" layoutX="21.0" layoutY="57.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" text="News">
                     <font>
                         <Font name="Berlin Sans FB" size="14.0" />
                     </font>
