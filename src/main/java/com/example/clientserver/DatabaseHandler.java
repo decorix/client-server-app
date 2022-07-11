@@ -61,6 +61,45 @@ public class DatabaseHandler extends Configs {
         return resSet;
     }
 
+    public ResultSet getNews(Message message){
+        ResultSet resSet = null;
+
+        String select = "SELECT * FROM " + Const.USER_TABLE2;
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            resSet = prSt.executeQuery();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resSet;
+
+    }
+
 
 
 }
+
+/*
++ " WHERE " + Const.MESSAGE_ID + "=? AND " +
+                Const.USER_NAME + "=? AND " + Const.USER_PATRONYMIC + "=? AND " + Const.USER_SECONDNAME + "=? AND " +
+                Const.USER_ITEM + "=? AND " + Const.USER_DATE + "=? AND " + Const.USER_MESSAGE + "=?"
+ */
+/*
+ try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+
+            prSt.setString(1, message.getMESSAGE_ID());
+            prSt.setString(2, message.getUSER_NAME());
+            prSt.setString(3, message.getUSER_PATRONYMIC());
+            prSt.setString(4, message.getUSER_SECONDNAME());
+            prSt.setString(5, message.getUSER_ITEM());
+            prSt.setString(6, message.getUSER_DATE());
+            prSt.setString(7, message.getUSER_MESSAGE());
+
+            resSet = prSt.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resSet;
+ */

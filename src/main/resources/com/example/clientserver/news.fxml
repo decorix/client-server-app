@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientserver.ControllerNews">
+   <children>
+      <TableView fx:id="tableForNews" layoutY="-1.0" prefHeight="374.0" prefWidth="594.0">
+        <columns>
+          <TableColumn fx:id="tableID" prefWidth="42.4000244140625" text="id" />
+          <TableColumn fx:id="tableMessage" prefWidth="112.79998779296875" text="message" />
+            <TableColumn fx:id="tableName" prefWidth="70.4000244140625" text="name" />
+            <TableColumn fx:id="tablePatronymic" prefWidth="84.0" text="patronymic" />
+            <TableColumn fx:id="tableSecondName" prefWidth="105.5999755859375" text="second_name" />
+            <TableColumn fx:id="tableItem" prefWidth="78.39996337890625" text="item" />
+            <TableColumn fx:id="tableDate" prefWidth="98.4000244140625" text="date" />
+        </columns>
+      </TableView>
+      <Button layoutX="7.0" layoutY="373.0" mnemonicParsing="false" text="Button" />
+   </children>
+</AnchorPane>

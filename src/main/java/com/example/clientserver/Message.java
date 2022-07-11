@@ -1,7 +1,9 @@
 package com.example.clientserver;
 
+import com.mysql.cj.conf.IntegerProperty;
+
 public class Message {
-    private String MESSAGE_ID;
+    private  int MESSAGE_ID;
     private String USER_NAME;
     private String USER_PATRONYMIC;
     private String USER_SECONDNAME;
@@ -9,7 +11,7 @@ public class Message {
     private String USER_DATE;
     private String USER_MESSAGE;
 
-    public Message(String MESSAGE_ID, String USER_NAME, String USER_PATRONYMIC, String USER_SECONDNAME, String USER_ITEM, String USER_DATE, String USER_MESSAGE) {
+    public Message(int MESSAGE_ID, String USER_NAME, String USER_PATRONYMIC, String USER_SECONDNAME, String USER_ITEM, String USER_DATE, String USER_MESSAGE) {
         this.MESSAGE_ID = MESSAGE_ID;
         this.USER_NAME = USER_NAME;
         this.USER_PATRONYMIC = USER_PATRONYMIC;
@@ -19,11 +21,15 @@ public class Message {
         this.USER_MESSAGE = USER_MESSAGE;
     }
 
-    public String getMESSAGE_ID() {
+    public Message() {
+
+    }
+
+    public int getMESSAGE_ID() {
         return MESSAGE_ID;
     }
 
-    public void setMESSAGE_ID(String MESSAGE_ID) {
+    public void setMESSAGE_ID(int MESSAGE_ID) {
         this.MESSAGE_ID = MESSAGE_ID;
     }
 

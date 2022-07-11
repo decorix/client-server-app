@@ -45,23 +45,23 @@ public class Controller {
     @FXML
     void initialize() {
         LoginInAcc.setOnAction(event -> {
-        String loginText = inputLogin.getText().trim();
-        String loginPassword = inputPassword.getText().trim();
-        String loginStatus = inputStatus.getText().trim();
+            String loginText = inputLogin.getText().trim();
+            String loginPassword = inputPassword.getText().trim();
+            String loginStatus = inputStatus.getText().trim();
 
-        if (!loginText.equals("") && !loginPassword.equals("")){
-            loginUser(loginText, loginPassword, loginStatus);
-        }else {
-            System.out.println("Error");
-        }
+            if (!loginText.equals("") && !loginPassword.equals("")) {
+                loginUser(loginText, loginPassword, loginStatus);
+            } else {
+                System.out.println("Error");
+            }
         });
 
         Register.setOnAction(event -> {
-            newScene("viewRegister.fxml");
+            newScene("viewRegister.fxml", Register);
         });
 
         LoginGuest.setOnAction(event -> {
-            newScene("menuForGuests.fxml");
+            newScene("menuForGuests.fxml", LoginGuest);
         });
 
     }
@@ -84,21 +84,20 @@ public class Controller {
             }
             counter++;
         }
-        if (counter>=1 && user.getUSER_STATUS().equals("User")){
+        if (counter >= 1 && user.getUSER_STATUS().equals("User")) {
             System.out.println("Success!");
-            newScene("menuForUser.fxml");
-        }
-        else if (counter>=1 && user.getUSER_STATUS().equals("Verificator")){
+            newScene("menuForUser.fxml", LoginInAcc);
+        } else if (counter >= 1 && user.getUSER_STATUS().equals("Verificator")) {
             System.out.println("Success!");
-            newScene("menuForVerificator.fxml");
-        }else if (counter>=1 && user.getUSER_STATUS().equals("Super-user")){
+            newScene("menuForVerificator.fxml", LoginInAcc);
+        } else if (counter >= 1 && user.getUSER_STATUS().equals("Super-user")) {
             System.out.println("Success!");
-            newScene("menuForSuperUser.fxml");
+            newScene("menuForSuperUser.fxml", LoginInAcc);
         }
     }
 
-    public void newScene(String scene){
-        Register.getScene().getWindow().hide();
+    public void newScene(String scene, Button button) {
+        button.getScene().getWindow().hide();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(scene));

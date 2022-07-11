@@ -10,6 +10,7 @@ public class Const {
     public static final String USER_GROUPNUMBER = "group_number";
     public static final String USER_STATUS = "Status";
     //Модель таблицы teacher
+    public static final String USER_TABLE2 = "teacher";
     public static final String MESSAGE_ID = "id";
     public static final String USER_NAME = "name";
     public static final String USER_PATRONYMIC = "patronymic";
