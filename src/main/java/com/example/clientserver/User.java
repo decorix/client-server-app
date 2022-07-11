@@ -8,6 +8,7 @@ public class User {
     private String USER_PASSWORDAGAIN;
     private String USER_STATUS;
 
+
     public User(String USER_EMAIL, String USER_NICKNAME, String USER_GROUPNUMBER, String USER_PASSWORD, String USER_PASSWORDAGAIN, String USER_STATUS) {
         this.USER_EMAIL = USER_EMAIL;
         this.USER_NICKNAME = USER_NICKNAME;

@@ -17,7 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class Controller {
-
+    public static String nickname;
+    public static String status;
     @FXML
     private ResourceBundle resources;
 
@@ -47,10 +48,10 @@ public class Controller {
         LoginInAcc.setOnAction(event -> {
             String loginText = inputLogin.getText().trim();
             String loginPassword = inputPassword.getText().trim();
-            String loginStatus = inputStatus.getText().trim();
+           // String loginStatus = inputStatus.getText().trim();
 
             if (!loginText.equals("") && !loginPassword.equals("")) {
-                loginUser(loginText, loginPassword, loginStatus);
+                loginUser(loginText, loginPassword);
             } else {
                 System.out.println("Error");
             }
@@ -66,14 +67,13 @@ public class Controller {
 
     }
 
-    private void loginUser(String loginText, String loginPassword, String loginStatus) {
+    private void loginUser(String loginText, String loginPassword) {
         DatabaseHandler dbHandler = new DatabaseHandler();
         User user = new User();
         user.setUSER_EMAIL(loginText);
         user.setUSER_PASSWORD(loginPassword);
-        user.setUSER_STATUS(loginStatus);
+       // user.setUSER_STATUS(loginStatus);
         ResultSet result = dbHandler.getUser(user);
-
 
         int counter = 0;
         while (true) {
@@ -83,14 +83,21 @@ public class Controller {
                 e.printStackTrace();
             }
             counter++;
+            try {
+                status = result.getString("Status");
+                nickname = result.getString("nickname");
+                System.out.println(nickname);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        if (counter >= 1 && user.getUSER_STATUS().equals("User")) {
+        if (counter >= 1 && status.equals("User")) {
             System.out.println("Success!");
             newScene("menuForUser.fxml", LoginInAcc);
-        } else if (counter >= 1 && user.getUSER_STATUS().equals("Verificator")) {
+        } else if (counter >= 1 && status.equals("Verificator")) {
             System.out.println("Success!");
             newScene("menuForVerificator.fxml", LoginInAcc);
-        } else if (counter >= 1 && user.getUSER_STATUS().equals("Super-user")) {
+        } else if (counter >= 1 && status.equals("Super-user")) {
             System.out.println("Success!");
             newScene("menuForSuperUser.fxml", LoginInAcc);
         }

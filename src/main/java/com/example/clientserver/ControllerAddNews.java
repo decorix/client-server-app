@@ -37,6 +37,7 @@ public class ControllerAddNews {
     @FXML
     void initialize() {
         addNewsButtonAdd.setOnAction(event -> {
+            String nickname = Controller.nickname;
             String name = addNewsName.getText().trim();
             String patronymic = addNewsPatronymic.getText().trim();
             String second_name = addNewsSecondName.getText().trim();
@@ -44,13 +45,13 @@ public class ControllerAddNews {
             String date = String.valueOf(addNewsDate.getValue());
             String message1 = addNewsMessage.getText().trim();
 
-            addMessageInDB(name,patronymic,second_name,item,date,message1);
+            addMessageInDB(name,patronymic,second_name,item,date,message1, nickname);
             newScene("menuForUser.fxml", addNewsButtonAdd);
         });
     }
-    public void addMessageInDB(String name, String patronymic, String second_name, String item, String date, String message1){
+    public void addMessageInDB(String name, String patronymic, String second_name, String item, String date, String message1, String nickname){
         DatabaseHandler dbHandler = new DatabaseHandler();
-        Message message = new Message(name, patronymic, second_name, item, date, message1);
+        Message message = new Message(name, patronymic, second_name, item, date, message1, nickname);
         dbHandler.addMessageDB(message);
     }
 

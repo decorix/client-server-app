@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientserver.ControllerListForUser">
+   <children>
+      <TableView fx:id="listForNews" layoutY="16.0" prefHeight="352.0" prefWidth="642.0">
+         <columns>
+            <TableColumn fx:id="listID" prefWidth="42.4000244140625" text="id" />
+            <TableColumn fx:id="listMessage" prefWidth="112.79998779296875" text="message" />
+            <TableColumn fx:id="listName" prefWidth="70.4000244140625" text="name" />
+            <TableColumn fx:id="listPatronymic" prefWidth="82.39996337890625" text="patronymic" />
+            <TableColumn fx:id="listSecondName" prefWidth="107.20001220703125" text="second_name" />
+            <TableColumn fx:id="listItem" prefWidth="78.39996337890625" text="item" />
+            <TableColumn fx:id="listDate" prefWidth="145.5999816894531" text="date" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

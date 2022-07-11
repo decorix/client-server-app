@@ -45,14 +45,15 @@ public class DatabaseHandler extends Configs {
     public ResultSet getUser(User user){
         ResultSet resSet =  null;
 
-        String select = "SELECT * FROM " + Const.USER_TABLE + " WHERE " + Const.USER_EMAIL + "=? AND " + Const.USER_PASSWORD + "=? AND " + Const.USER_STATUS + "=?";
+        String select = "SELECT * FROM " + Const.USER_TABLE + " WHERE " + Const.USER_EMAIL + "=? AND " + Const.USER_PASSWORD + "=?"; //+ Const.USER_STATUS + "=?";  AND " + Const.USER_NICKNAME + "=?"
 
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
 
             prSt.setString(1, user.getUSER_EMAIL());
             prSt.setString(2, user.getUSER_PASSWORD());
-            prSt.setString(3, user.getUSER_STATUS());
+            //prSt.setString(3, user.getUSER_STATUS());
+           //prSt.setString(4, user.getUSER_NICKNAME());
 
             resSet = prSt.executeQuery();
         } catch (Exception e) {
@@ -78,7 +79,7 @@ public class DatabaseHandler extends Configs {
 
     public void addMessageDB(Message message){
             String insert = "INSERT INTO " + Const.USER_TABLE2 + "(" + Const.USER_NAME + "," + Const.USER_PATRONYMIC + "," +
-                    Const.USER_SECONDNAME + "," + Const.USER_ITEM+ "," + Const.USER_DATE + "," + Const.USER_MESSAGE + ")" + " VALUES" + "(?,?,?,?,?,?)";
+                    Const.USER_SECONDNAME + "," + Const.USER_ITEM+ "," + Const.USER_DATE + "," + Const.USER_MESSAGE + "," + Const.USER_NICKNAME + ")" + " VALUES" + "(?,?,?,?,?,?,?)";
             try {
                 PreparedStatement prSt = getDbConnection().prepareStatement(insert);
 
@@ -88,7 +89,7 @@ public class DatabaseHandler extends Configs {
                 prSt.setString(4, message.getUSER_ITEM());
                 prSt.setString(5, message.getUSER_DATE());
                 prSt.setString(6, message.getUSER_MESSAGE());
-               // prSt.setString(7, user.getUSER_STATUS());
+                prSt.setString(7, message.getUSER_NICKNAME());
 
                 prSt.executeUpdate();
             } catch (Exception e) {
