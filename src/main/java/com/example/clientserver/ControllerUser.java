@@ -35,23 +35,28 @@ public class ControllerUser {
     @FXML
     void initialize() {
         NewsForUser.setOnAction(event -> {
-            NewsForUser.getScene().getWindow().hide();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("news.fxml"));
-
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+            newScene("news.fxml", NewsForUser);
 
         });
+        AddNewsForUser.setOnAction(event -> {
+            newScene("addNews.fxml", AddNewsForUser);
+        });
     }
+    public void newScene(String scene, Button button) {
+        button.getScene().getWindow().hide();
 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(scene));
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
 }

@@ -46,25 +46,29 @@ public class ControllerRegistration {
     void initialize() {
         Register.setOnAction(event -> {
             signUpNewUser();
+            newScene("hello-view.fxml", Register);
         });
 
-         BackMenu.setOnAction(event -> {
-
-            BackMenu.getScene().getWindow().hide();
-
-             FXMLLoader loader = new FXMLLoader();
-             loader.setLocation(getClass().getResource("hello-view.fxml"));
-             try {
-                 loader.load();
-             } catch (IOException e) {
-                 e.printStackTrace();
-             }
-
-             Parent root = loader.getRoot();
-             Stage stage = new Stage();
-             stage.setScene(new Scene(root));
-             stage.showAndWait();
+        BackMenu.setOnAction(event -> {
+            newScene("hello-view.fxml", BackMenu);
         });
+    }
+
+    private void newScene(String scene, Button button) {
+        button.getScene().getWindow().hide();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(scene));
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     private void signUpNewUser() {

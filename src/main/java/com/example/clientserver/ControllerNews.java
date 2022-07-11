@@ -63,11 +63,11 @@ public class ControllerNews {
         }
         tableID.setCellValueFactory(new PropertyValueFactory<Message, Integer>("MESSAGE_ID"));
         tableName.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_NAME"));
-        tablePatronymic.setCellValueFactory(new PropertyValueFactory<>("USER_PATRONYMIC"));
-        tableSecondName.setCellValueFactory(new PropertyValueFactory<>("USER_SECONDNAME"));
-        tableItem.setCellValueFactory(new PropertyValueFactory<>("USER_ITEM"));
-        tableDate.setCellValueFactory(new PropertyValueFactory<>("USER_DATE"));
-        tableMessage.setCellValueFactory(new PropertyValueFactory<>("USER_MESSAGE"));
+        tablePatronymic.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_PATRONYMIC"));
+        tableSecondName.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_SECONDNAME"));
+        tableItem.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_ITEM"));
+        tableDate.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_DATE"));
+        tableMessage.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_MESSAGE"));
         tableForNews.setItems(list);
 
 
@@ -84,9 +84,10 @@ public class ControllerNews {
             Parent root = loader.getRoot();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.showAndWait();
+            stage.show();
 
         });
+
 
     }
 

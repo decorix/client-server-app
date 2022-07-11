@@ -76,6 +76,27 @@ public class DatabaseHandler extends Configs {
 
     }
 
+    public void addMessageDB(Message message){
+            String insert = "INSERT INTO " + Const.USER_TABLE2 + "(" + Const.USER_NAME + "," + Const.USER_PATRONYMIC + "," +
+                    Const.USER_SECONDNAME + "," + Const.USER_ITEM+ "," + Const.USER_DATE + "," + Const.USER_MESSAGE + ")" + " VALUES" + "(?,?,?,?,?,?)";
+            try {
+                PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+
+                prSt.setString(1, message.getUSER_NAME());
+                prSt.setString(2, message.getUSER_PATRONYMIC());
+                prSt.setString(3, message.getUSER_SECONDNAME());
+                prSt.setString(4, message.getUSER_ITEM());
+                prSt.setString(5, message.getUSER_DATE());
+                prSt.setString(6, message.getUSER_MESSAGE());
+               // prSt.setString(7, user.getUSER_STATUS());
+
+                prSt.executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+    }
+
 
 
 }

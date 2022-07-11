@@ -20,6 +20,14 @@ public class Message {
         this.USER_DATE = USER_DATE;
         this.USER_MESSAGE = USER_MESSAGE;
     }
+    public Message(String USER_NAME, String USER_PATRONYMIC, String USER_SECONDNAME, String USER_ITEM, String USER_DATE, String USER_MESSAGE) {
+        this.USER_NAME = USER_NAME;
+        this.USER_PATRONYMIC = USER_PATRONYMIC;
+        this.USER_SECONDNAME = USER_SECONDNAME;
+        this.USER_ITEM = USER_ITEM;
+        this.USER_DATE = USER_DATE;
+        this.USER_MESSAGE = USER_MESSAGE;
+    }
 
     public Message() {
 
