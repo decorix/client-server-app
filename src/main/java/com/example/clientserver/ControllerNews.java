@@ -5,10 +5,17 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -21,6 +28,9 @@ public class ControllerNews {
     ObservableList<Message> list = FXCollections.observableArrayList();
     @FXML
     private TableView<Message> tableForNews;
+
+    @FXML
+    private Button BackToUserMenu;
 
     @FXML
     private TableColumn<Message, String> tableDate;
@@ -60,25 +70,43 @@ public class ControllerNews {
         tableMessage.setCellValueFactory(new PropertyValueFactory<>("USER_MESSAGE"));
         tableForNews.setItems(list);
 
+
+        BackToUserMenu.setOnAction(event -> {
+            BackToUserMenu.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("menuForUser.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        });
+
     }
 
     public void viewNews() throws SQLException {
         DatabaseHandler db = new DatabaseHandler();
         Message message = new Message();
 
-            ResultSet result = db.getNews(message);
-            while (result.next()) {
-                int id = result.getInt("id");
-                String name = result.getString("name");
-                String patronymic = result.getString("patronymic");
-                String second_name = result.getString("second_name");
-                String item = result.getString("item");
-                String date = result.getString("date");
-                String message1 = result.getString("message");
-                //System.out.println("name: " + name + " patronymic: " + patronymic + " second_name: " + second_name + " item: " + item + " date: " + date + " message: " + message1);
-                Message message2 = new Message(id, name, patronymic, second_name, item, date, message1);
-                list.add(new Message(message2.getMESSAGE_ID(), message2.getUSER_NAME(), message2.getUSER_PATRONYMIC(), message2.getUSER_SECONDNAME(), message2.getUSER_ITEM(), message2.getUSER_DATE(), message2.getUSER_MESSAGE()));
-            }
+        ResultSet result = db.getNews(message);
+        while (result.next()) {
+            int id = result.getInt("id");
+            String name = result.getString("name");
+            String patronymic = result.getString("patronymic");
+            String second_name = result.getString("second_name");
+            String item = result.getString("item");
+            String date = result.getString("date");
+            String message1 = result.getString("message");
+            //System.out.println("name: " + name + " patronymic: " + patronymic + " second_name: " + second_name + " item: " + item + " date: " + date + " message: " + message1);
+            Message message2 = new Message(id, name, patronymic, second_name, item, date, message1);
+            list.add(new Message(message2.getMESSAGE_ID(), message2.getUSER_NAME(), message2.getUSER_PATRONYMIC(), message2.getUSER_SECONDNAME(), message2.getUSER_ITEM(), message2.getUSER_DATE(), message2.getUSER_MESSAGE()));
+        }
 
     }
 
