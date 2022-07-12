@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -48,10 +50,15 @@ public class Controller {
         LoginInAcc.setOnAction(event -> {
             String loginText = inputLogin.getText().trim();
             String loginPassword = inputPassword.getText().trim();
-           // String loginStatus = inputStatus.getText().trim();
+
+            // String loginStatus = inputStatus.getText().trim();
 
             if (!loginText.equals("") && !loginPassword.equals("")) {
-                loginUser(loginText, loginPassword);
+                try {
+                    loginUser(loginText, loginPassword);
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
             } else {
                 System.out.println("Error");
             }
@@ -68,11 +75,13 @@ public class Controller {
 
     }
 
-    private void loginUser(String loginText, String loginPassword) {
+    private void loginUser(String loginText, String loginPassword) throws NoSuchAlgorithmException {
         DatabaseHandler dbHandler = new DatabaseHandler();
         User user = new User();
+        String hash_password = hashPassword(loginPassword);
+        //System.out.println(hash_password);
         user.setUSER_EMAIL(loginText);
-        user.setUSER_PASSWORD(loginPassword);
+        user.setUSER_PASSWORD(hash_password);
        // user.setUSER_STATUS(loginStatus);
         ResultSet result = dbHandler.getUser(user);
 
@@ -119,6 +128,16 @@ public class Controller {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        byte[] bytes = md5.digest(password.getBytes());
+        StringBuilder builder = new StringBuilder();
+        for (byte b: bytes){
+            builder.append(String.format("%02X ", b));
+        }
+        return builder.toString().replaceAll(" ", "").toLowerCase();
     }
 
 }

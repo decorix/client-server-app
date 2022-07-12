@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 
 public class ControllerReset {
@@ -45,37 +47,54 @@ public class ControllerReset {
         reset.setOnAction(event -> {
             String str1 = "password";
             String password = inputPassword.getText().trim();
-            resetData(password, str1);
+            try {
+                resetData(password, str1);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
         });
         reset1.setOnAction(event -> {
             String str2 = "nick";
             String nick = nickname.getText().trim();
-            resetData(nick, str2);
+            try {
+                resetData(nick, str2);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
         });
         reset2.setOnAction(event -> {
             String str3 = "group_number";
             String group_number = groupnumber.getText().trim();
-            resetData(group_number, str3);
+            try {
+                resetData(group_number, str3);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
         });
         reset3.setOnAction(event -> {
             String str4 = "email";
             String email1 = email.getText().trim();
-            resetData(email1, str4);
+            try {
+                resetData(email1, str4);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
         });
         backToMenuUser.setOnAction(event -> {
             newScene("menuForUser.fxml", backToMenuUser);
         });
     }
 
-    public void resetData(String data, String text) {
+    public void resetData(String data, String text) throws NoSuchAlgorithmException {
         DatabaseHandler dbHandler = new DatabaseHandler();
         User user = new User();
 
         if (text.equals("password")) {
-            user.setUSER_PASSWORD(data);
+            String hash_password = hashPassword(data);
+            user.setUSER_PASSWORD(hash_password);
             String insert = "UPDATE " + Const.USER_TABLE + " SET " + Const.USER_PASSWORD + "=?" + " WHERE " + Const.USER_NICKNAME + "=?";
             //data = user.getUSER_PASSWORD();
-            dbHandler.resetData(user, insert, data);
+            dbHandler.resetData(user, insert, hash_password);
         } else if (text.equals("email")) {
             user.setUSER_EMAIL(data);
             String insert = "UPDATE " + Const.USER_TABLE + " SET " + Const.USER_EMAIL + "=?" + " WHERE " + Const.USER_NICKNAME + "=?";
@@ -115,6 +134,15 @@ public class ControllerReset {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+    public String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        byte[] bytes = md5.digest(password.getBytes());
+        StringBuilder builder = new StringBuilder();
+        for (byte b: bytes){
+            builder.append(String.format("%02X ", b));
+        }
+        return builder.toString().replaceAll(" ", "").toLowerCase();
     }
 
 }

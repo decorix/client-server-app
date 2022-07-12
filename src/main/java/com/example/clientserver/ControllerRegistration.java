@@ -2,6 +2,10 @@ package com.example.clientserver;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -45,7 +49,11 @@ public class ControllerRegistration {
     @FXML
     void initialize() {
         Register.setOnAction(event -> {
-            signUpNewUser();
+            try {
+                signUpNewUser();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
             newScene("hello-view.fxml", Register);
         });
 
@@ -71,7 +79,7 @@ public class ControllerRegistration {
         stage.show();
     }
 
-    private void signUpNewUser() {
+    private void signUpNewUser() throws NoSuchAlgorithmException {
         DatabaseHandler dbHandler = new DatabaseHandler();
         String USER_EMAIL = email.getText();
         String USER_PASSWORD = inputPassword.getText();
@@ -80,11 +88,23 @@ public class ControllerRegistration {
         String USER_PASSWORDAGAIN = inputPasswordAgain.getText();
         String USER_STATUS = "User";
 
-        User user = new User(USER_EMAIL, USER_NICKNAME, USER_GROUPNUMBER, USER_PASSWORD, USER_PASSWORDAGAIN, USER_STATUS);
+        String hash_Password = hashPassword(USER_PASSWORD);
+        String hash_PasswordAgain = hashPassword(USER_PASSWORDAGAIN);
+
+        User user = new User(USER_EMAIL, USER_NICKNAME, USER_GROUPNUMBER, hash_Password, hash_PasswordAgain, USER_STATUS);
 
 
         dbHandler.signUpUser(user);
 
+    }
+    public String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        byte[] bytes = md5.digest(password.getBytes());
+        StringBuilder builder = new StringBuilder();
+        for (byte b: bytes){
+            builder.append(String.format("%02X ", b));
+        }
+        return builder.toString().replaceAll(" ", "").toLowerCase();
     }
 
 }
