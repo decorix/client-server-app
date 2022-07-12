@@ -28,6 +28,11 @@
                 </Button>
                 <TextField layoutX="243.0" layoutY="27.0" prefHeight="30.0" prefWidth="220.0" promptText="Search" />
             <Text layoutX="596.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status: Super User" wrappingWidth="103.20004882812509" />
+            <Button fx:id="authorization" layoutX="14.0" layoutY="248.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Authorization">
+               <font>
+                  <Font name="Bell MT" size="14.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
         <Label layoutX="219.0" prefHeight="105.0" prefWidth="262.0" text="Client-server app" textFill="WHITE">

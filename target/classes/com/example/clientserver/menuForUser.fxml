@@ -30,6 +30,16 @@
             <TextField layoutX="243.0" layoutY="27.0" prefHeight="30.0" prefWidth="220.0" promptText="Search" />
             <Text layoutX="639.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status: User" wrappingWidth="66.40000000000009" />
             <Pane layoutX="197.0" layoutY="5.0" prefHeight="258.0" prefWidth="312.0" />
+            <Button fx:id="dataReset" layoutX="14.0" layoutY="134.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" text="Data reset">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="authorization" layoutX="14.0" layoutY="251.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Authorization">
+               <font>
+                  <Font name="Bell MT" size="14.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
         <Label layoutX="219.0" prefHeight="105.0" prefWidth="262.0" text="Client-server app" textFill="WHITE">

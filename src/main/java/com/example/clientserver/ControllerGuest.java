@@ -12,12 +12,18 @@ import java.io.IOException;
 public class ControllerGuest {
 
     @FXML
+    private Button authorization;
+
+    @FXML
     private Button NewsForUser;
 
     @FXML
     void initialize() {
         NewsForUser.setOnAction(event ->{
         newScene("news.fxml", NewsForUser);
+        });
+        authorization.setOnAction(event ->{
+            newScene("hello-view.fxml", authorization);
         });
 
     }

@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class ControllerUser {
@@ -33,6 +34,13 @@ public class ControllerUser {
     private Button NewsForUser;
 
     @FXML
+    private Button dataReset;
+
+    @FXML
+    private Button authorization;
+
+
+    @FXML
     void initialize() {
         NewsForUser.setOnAction(event -> {
             newScene("news.fxml", NewsForUser);
@@ -44,7 +52,16 @@ public class ControllerUser {
         ListNewsForUser.setOnAction(event -> {
             newScene("listForNews.fxml", ListNewsForUser);
         });
+
+        dataReset.setOnAction(event -> {
+            newScene("dataReset.fxml", dataReset);
+        });
+
+        authorization.setOnAction(event ->{
+            newScene("hello-view.fxml", authorization);
+        });
     }
+
     public void newScene(String scene, Button button) {
         button.getScene().getWindow().hide();
 

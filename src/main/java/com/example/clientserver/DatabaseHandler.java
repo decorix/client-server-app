@@ -126,7 +126,6 @@ public class DatabaseHandler extends Configs {
             prSt.setInt(7, message.getMESSAGE_ID());
 
 
-
             prSt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,12 +151,13 @@ public class DatabaseHandler extends Configs {
         ResultSet resSet = null;
 
         String select = "SELECT " + "teacher." + Const.MESSAGE_ID + ", teacher." + Const.USER_NAME + ", teacher." + Const.USER_PATRONYMIC + ", teacher." +
-                Const.USER_SECONDNAME + ", teacher." + Const.USER_ITEM + ", teacher."  + Const.USER_DATE + ", teacher." +  Const.USER_MESSAGE + ", teacher." +
-                Const.MESSAGE_NICKNAME+ ", verificator." + Const.VERIFICATOR_NAME  +
+                Const.USER_SECONDNAME + ", teacher." + Const.USER_ITEM + ", teacher." + Const.USER_DATE + ", teacher." + Const.USER_MESSAGE + ", teacher." +
+                Const.MESSAGE_NICKNAME + ", verificator." + Const.VERIFICATOR_NAME +
                 " FROM " + Const.USER_TABLE2 +
-                " JOIN " + Const.USER_TABLE + " ON teacher." + Const.MESSAGE_NICKNAME + "=users." + Const.USER_NICKNAME  +
+                " JOIN " + Const.USER_TABLE + " ON teacher." + Const.MESSAGE_NICKNAME + "=users." + Const.USER_NICKNAME +
                 " JOIN " + Const.USER_TABLE3 + " ON verificator." + Const.VERIFICATOR_CONTROL_GROUP + "=users." + Const.USER_GROUPNUMBER +
-                " WHERE verificator." + Const.VERIFICATOR_NAME + "=?";;
+                " WHERE verificator." + Const.VERIFICATOR_NAME + "=?";
+        ;
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
             prSt.setString(1, Controller.nickname);
@@ -170,6 +170,20 @@ public class DatabaseHandler extends Configs {
 
     }
 
+    public void resetData(User user, String sql, String data) {
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(sql);
+            prSt.setString(1, data);
+            prSt.setString(2, Controller.nickname);
+
+
+            prSt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 }

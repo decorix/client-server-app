@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ControllerVerificator {
+    @FXML
+    private Button authorization;
 
     @FXML
     private Button AddNewsForUser;
@@ -38,6 +40,9 @@ public class ControllerVerificator {
 
         groupVerificator.setOnAction(event ->{
             newScene("menuGroup.fxml", groupVerificator);
+        });
+        authorization.setOnAction(event ->{
+            newScene("hello-view.fxml", authorization);
         });
     }
     public void newScene(String scene, Button button) {
