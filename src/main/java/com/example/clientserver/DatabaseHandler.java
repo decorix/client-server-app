@@ -185,6 +185,25 @@ public class DatabaseHandler extends Configs {
 
     }
 
+    public int countMessage(){
+        int counter=0;
+        String select = "SELECT COUNT(*) AS total FROM " + Const.USER_TABLE2 + " WHERE " + Const.MESSAGE_NICKNAME + "=?" + " GROUP BY " + Const.MESSAGE_NICKNAME;
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            prSt.setString(1, Controller.nickname);
+            prSt.executeQuery();
+            ResultSet resSet = prSt.getResultSet();
+            if (resSet.next()){
+                counter=resSet.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return counter;
+
+    }
+
 
 }
 
