@@ -40,10 +40,8 @@ public class DatabaseHandler extends Configs {
     }
 
 
-
-
-    public ResultSet getUser(User user){
-        ResultSet resSet =  null;
+    public ResultSet getUser(User user) {
+        ResultSet resSet = null;
 
         String select = "SELECT * FROM " + Const.USER_TABLE + " WHERE " + Const.USER_EMAIL + "=? AND " + Const.USER_PASSWORD + "=?"; //+ Const.USER_STATUS + "=?";  AND " + Const.USER_NICKNAME + "=?"
 
@@ -53,7 +51,7 @@ public class DatabaseHandler extends Configs {
             prSt.setString(1, user.getUSER_EMAIL());
             prSt.setString(2, user.getUSER_PASSWORD());
             //prSt.setString(3, user.getUSER_STATUS());
-           //prSt.setString(4, user.getUSER_NICKNAME());
+            //prSt.setString(4, user.getUSER_NICKNAME());
 
             resSet = prSt.executeQuery();
         } catch (Exception e) {
@@ -62,7 +60,7 @@ public class DatabaseHandler extends Configs {
         return resSet;
     }
 
-    public ResultSet getNews(Message message){
+    public ResultSet getNews(Message message) {
         ResultSet resSet = null;
 
         String select = "SELECT * FROM " + Const.USER_TABLE2;
@@ -77,24 +75,98 @@ public class DatabaseHandler extends Configs {
 
     }
 
-    public void addMessageDB(Message message){
-            String insert = "INSERT INTO " + Const.USER_TABLE2 + "(" + Const.USER_NAME + "," + Const.USER_PATRONYMIC + "," +
-                    Const.USER_SECONDNAME + "," + Const.USER_ITEM+ "," + Const.USER_DATE + "," + Const.USER_MESSAGE + "," + Const.USER_NICKNAME + ")" + " VALUES" + "(?,?,?,?,?,?,?)";
-            try {
-                PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+    public ResultSet getNewsForList(Message message) {
+        ResultSet resSet = null;
 
-                prSt.setString(1, message.getUSER_NAME());
-                prSt.setString(2, message.getUSER_PATRONYMIC());
-                prSt.setString(3, message.getUSER_SECONDNAME());
-                prSt.setString(4, message.getUSER_ITEM());
-                prSt.setString(5, message.getUSER_DATE());
-                prSt.setString(6, message.getUSER_MESSAGE());
-                prSt.setString(7, message.getUSER_NICKNAME());
+        String select = "SELECT * FROM " + Const.USER_TABLE2 + " WHERE " + Const.USER_NICKNAME + "=?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            prSt.setString(1, Controller.nickname);
+            resSet = prSt.executeQuery();
 
-                prSt.executeUpdate();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resSet;
+
+    }
+
+    public void addMessageDB(Message message) {
+        String insert = "INSERT INTO " + Const.USER_TABLE2 + "(" + Const.USER_NAME + "," + Const.USER_PATRONYMIC + "," +
+                Const.USER_SECONDNAME + "," + Const.USER_ITEM + "," + Const.USER_DATE + "," + Const.USER_MESSAGE + "," + Const.USER_NICKNAME + ")" + " VALUES" + "(?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+
+            prSt.setString(1, message.getUSER_NAME());
+            prSt.setString(2, message.getUSER_PATRONYMIC());
+            prSt.setString(3, message.getUSER_SECONDNAME());
+            prSt.setString(4, message.getUSER_ITEM());
+            prSt.setString(5, message.getUSER_DATE());
+            prSt.setString(6, message.getUSER_MESSAGE());
+            prSt.setString(7, message.getUSER_NICKNAME());
+
+            prSt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void editMessageDB(Message message) {
+        String insert = "UPDATE " + Const.USER_TABLE2 + " SET " + Const.USER_NAME + "=?" + ", " + Const.USER_PATRONYMIC + "=?" + "," + Const.USER_SECONDNAME + "=?" + "," +
+                Const.USER_ITEM + "=?" + ", " + Const.USER_DATE + "=?" + "," + Const.USER_MESSAGE + "=?" + " WHERE " + Const.MESSAGE_ID + "=?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            prSt.setString(1, message.getUSER_NAME());
+            prSt.setString(2, message.getUSER_PATRONYMIC());
+            prSt.setString(3, message.getUSER_SECONDNAME());
+            prSt.setString(4, message.getUSER_ITEM());
+            prSt.setString(5, message.getUSER_DATE());
+            prSt.setString(6, message.getUSER_MESSAGE());
+            prSt.setInt(7, message.getMESSAGE_ID());
+
+
+
+            prSt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void deleteMessageDB(Message message) {
+        String insert = "DELETE FROM " + Const.USER_TABLE2 + " WHERE " + Const.MESSAGE_ID + "=?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            prSt.setInt(1, message.getMESSAGE_ID());
+
+
+            prSt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public ResultSet getNewsForGroup(Message message) {
+        ResultSet resSet = null;
+
+        String select = "SELECT " + "teacher." + Const.MESSAGE_ID + ", teacher." + Const.USER_NAME + ", teacher." + Const.USER_PATRONYMIC + ", teacher." +
+                Const.USER_SECONDNAME + ", teacher." + Const.USER_ITEM + ", teacher."  + Const.USER_DATE + ", teacher." +  Const.USER_MESSAGE + ", teacher." +
+                Const.MESSAGE_NICKNAME+ ", verificator." + Const.VERIFICATOR_NAME  +
+                " FROM " + Const.USER_TABLE2 +
+                " JOIN " + Const.USER_TABLE + " ON teacher." + Const.MESSAGE_NICKNAME + "=users." + Const.USER_NICKNAME  +
+                " JOIN " + Const.USER_TABLE3 + " ON verificator." + Const.VERIFICATOR_CONTROL_GROUP + "=users." + Const.USER_GROUPNUMBER +
+                " WHERE verificator." + Const.VERIFICATOR_NAME + "=?";;
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            prSt.setString(1, Controller.nickname);
+            resSet = prSt.executeQuery();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resSet;
 
     }
 
@@ -114,14 +186,19 @@ public class DatabaseHandler extends Configs {
             prSt.setString(1, message.getMESSAGE_ID());
             prSt.setString(2, message.getUSER_NAME());
             prSt.setString(3, message.getUSER_PATRONYMIC());
-            prSt.setString(4, message.getUSER_SECONDNAME());
-            prSt.setString(5, message.getUSER_ITEM());
-            prSt.setString(6, message.getUSER_DATE());
-            prSt.setString(7, message.getUSER_MESSAGE());
-
             resSet = prSt.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resSet;
+ */
+
+/*
+ String select = "SELECT " + Const.MESSAGE_ID + ", " + Const.USER_NAME + ", " + Const.USER_PATRONYMIC + ", " +
+                Const.USER_SECONDNAME + ", " + Const.USER_ITEM + ", "  + Const.USER_DATE + ", " +  Const.USER_MESSAGE + ", " +
+                Const.MESSAGE_NICKNAME+ ", " + Const.VERIFICATOR_NAME  +
+                " FROM " + Const.USER_TABLE2 +
+                " JOIN " + Const.USER_TABLE + " ON " + Const.MESSAGE_NICKNAME + "=" + Const.USER_NICKNAME  +
+                " JOIN " + Const.USER_TABLE3 + " ON " + Const.VERIFICATOR_CONTROL_GROUP + " = " + Const.USER_GROUPNUMBER +
+                " WHERE " + Const.VERIFICATOR_NAME + " = " + Const.VERIFICATOR_NAME + "=?";
  */

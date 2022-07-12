@@ -13,13 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ControllerListForUser {
+public class ControllerNewsForSuperUser {
     ObservableList<Message> list2 = FXCollections.observableArrayList();
     int index = -1;
 
@@ -125,7 +124,7 @@ public class ControllerListForUser {
         DatabaseHandler db = new DatabaseHandler();
         Message message = new Message();
 
-        ResultSet result = db.getNewsForList(message);
+        ResultSet result = db.getNews(message);
         while (result.next()) {
             int id = result.getInt("id");
             String name = result.getString("name");
@@ -202,37 +201,3 @@ public class ControllerListForUser {
         stage.show();
     }
 }
-
-/*
-        listRefreshNews.setOnAction(event -> {
-            DatabaseHandler dbHandler = new DatabaseHandler();
-            Message message = new Message();
-            ResultSet result = dbHandler.refreshMessage(message);
-
-            while (true){
-                try {
-                    if (!result.next()) break;
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    list2.add(new Message(
-                            result.getInt("id"),
-                            result.getString("name"),
-                            result.getString("patronymic"),
-                            result.getString("second_name"),
-                            result.getString("item"),
-                            result.getString("date"),
-                            result.getString("message")
-
-                    ));
-                    listForNews.setItems(list2);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        });
-
-         */

@@ -1,36 +1,27 @@
 package com.example.clientserver;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
-public class ControllerUser {
+public class ControllerVerificator {
+
     @FXML
     private Button AddNewsForUser;
-
-    @FXML
-    private Button DeleteNewsForUser;
-
-    @FXML
-    private Button EditNewsForUser;
 
     @FXML
     private Button ListNewsForUser;
 
     @FXML
     private Button NewsForUser;
+
+    @FXML
+    private Button groupVerificator;
 
     @FXML
     void initialize() {
@@ -43,6 +34,10 @@ public class ControllerUser {
         });
         ListNewsForUser.setOnAction(event -> {
             newScene("listForNews.fxml", ListNewsForUser);
+        });
+
+        groupVerificator.setOnAction(event ->{
+            newScene("menuGroup.fxml", groupVerificator);
         });
     }
     public void newScene(String scene, Button button) {

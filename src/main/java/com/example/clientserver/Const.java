@@ -18,8 +18,15 @@ public class Const {
     public static final String USER_ITEM = "item";
     public static final String USER_DATE = "date";
     public static final String USER_MESSAGE = "message";
-
-
+    public static final String MESSAGE_NICKNAME = "nickname";
+    //Модель таблицы verificator
+    public static final String USER_TABLE3 = "verificator";
+    public static final String VERIFICATOR_ID = "id";
+    public static final String VERIFICATOR_EMAIL = "Email";
+    public static final String VERIFICATOR_PASSWORD = "password";
+    public static final String VERIFICATOR_NAME = "name";
+    public static final String VERIFICATOR_CONTROL_GROUP = "control_group";
+    public static final String VERIFICATOR_STATUS = "Status";
 
 
 }

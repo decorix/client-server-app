@@ -46,7 +46,15 @@ public class ControllerAddNews {
             String message1 = addNewsMessage.getText().trim();
 
             addMessageInDB(name,patronymic,second_name,item,date,message1, nickname);
-            newScene("menuForUser.fxml", addNewsButtonAdd);
+
+            if (Controller.status.equals("User")){
+                newScene("menuForUser.fxml", addNewsButtonAdd);
+            } else if (Controller.status.equals("Super-user")){
+                newScene("menuForSuperUser.fxml", addNewsButtonAdd);
+            } else  {
+                newScene("menuForVerificator.fxml", addNewsButtonAdd);
+            }
+
         });
     }
     public void addMessageInDB(String name, String patronymic, String second_name, String item, String date, String message1, String nickname){

@@ -72,23 +72,34 @@ public class ControllerNews {
 
 
         BackToUserMenu.setOnAction(event -> {
-            BackToUserMenu.getScene().getWindow().hide();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("menuForUser.fxml"));
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (Controller.status.equals("User")){
+                newScene("menuForUser.fxml", BackToUserMenu);
+            } else if (Controller.status.equals("Super-user")){
+                newScene("menuForSuperUser.fxml",BackToUserMenu);
+            } else if (Controller.status.equals("Verificator")){
+                newScene("menuForVerificator.fxml", BackToUserMenu);
+            } else {
+                newScene("menuForGuests.fxml", BackToUserMenu);
             }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
         });
 
 
+    }
+    public void newScene(String scene, Button button) {
+        button.getScene().getWindow().hide();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(scene));
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void viewNews() throws SQLException {

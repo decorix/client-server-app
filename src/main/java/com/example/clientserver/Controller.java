@@ -62,6 +62,7 @@ public class Controller {
         });
 
         LoginGuest.setOnAction(event -> {
+            status="Guests";
             newScene("menuForGuests.fxml", LoginGuest);
         });
 

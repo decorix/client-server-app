@@ -13,21 +13,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ControllerListForUser {
-    ObservableList<Message> list2 = FXCollections.observableArrayList();
+public class ControllerGroup {
+    ObservableList<Message> list3 = FXCollections.observableArrayList();
     int index = -1;
-
     @FXML
-    private AnchorPane listTable;
+    private Button listButtonBack;
 
     @FXML
     private TableColumn<Message, String> listDate;
+
+    @FXML
+    private TextField listDate2;
 
     @FXML
     private Button listDeleteNews;
@@ -36,50 +37,46 @@ public class ControllerListForUser {
     private Button listEditNews;
 
     @FXML
-    private Button listButtonBack;
-
-    @FXML
     private TableView<Message> listForNews;
 
     @FXML
     private TableColumn<Message, Integer> listID;
 
     @FXML
-    private TableColumn<Message, String> listItem;
-
-    @FXML
-    private TableColumn<Message, String> listMessage;
-
-    @FXML
-    private TableColumn<Message, String> listName;
-
-    @FXML
-    private TableColumn<Message, String> listPatronymic;
-
-    @FXML
-    private TableColumn<Message, String> listSecondName;
-
-    @FXML
-    private TextField listDate2;
-
-    @FXML
     private TextField listID2;
+
+    @FXML
+    private TableColumn<Message, String> listItem;
 
     @FXML
     private TextField listItem2;
 
     @FXML
+    private TableColumn<Message, String> listMessage;
+
+    @FXML
     private TextField listMessage2;
+
+    @FXML
+    private TableColumn<Message, String> listName;
 
     @FXML
     private TextField listName2;
 
     @FXML
+    private TableColumn<Message, String> listPatronymic;
+
+    @FXML
     private TextField listPatronymic2;
+
+    @FXML
+    private TableColumn<Message, String> listSecondName;
 
     @FXML
     private TextField listSecondName2;
 
+    @FXML
+    private AnchorPane listTable;
 
     @FXML
     void initialize() {
@@ -89,6 +86,7 @@ public class ControllerListForUser {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         listID.setCellValueFactory(new PropertyValueFactory<Message, Integer>("MESSAGE_ID"));
         listName.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_NAME"));
         listPatronymic.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_PATRONYMIC"));
@@ -96,7 +94,9 @@ public class ControllerListForUser {
         listItem.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_ITEM"));
         listDate.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_DATE"));
         listMessage.setCellValueFactory(new PropertyValueFactory<Message, String>("USER_MESSAGE"));
-        listForNews.setItems(list2);
+        listForNews.setItems(list3);
+
+
 
         listButtonBack.setOnAction(event -> {
             if (Controller.status.equals("User")){
@@ -125,7 +125,7 @@ public class ControllerListForUser {
         DatabaseHandler db = new DatabaseHandler();
         Message message = new Message();
 
-        ResultSet result = db.getNewsForList(message);
+        ResultSet result = db.getNewsForGroup(message);
         while (result.next()) {
             int id = result.getInt("id");
             String name = result.getString("name");
@@ -136,7 +136,7 @@ public class ControllerListForUser {
             String message1 = result.getString("message");
             //System.out.println("name: " + name + " patronymic: " + patronymic + " second_name: " + second_name + " item: " + item + " date: " + date + " message: " + message1);
             Message message2 = new Message(id, name, patronymic, second_name, item, date, message1);
-            list2.add(new Message(message2.getMESSAGE_ID(), message2.getUSER_NAME(), message2.getUSER_PATRONYMIC(), message2.getUSER_SECONDNAME(), message2.getUSER_ITEM(), message2.getUSER_DATE(), message2.getUSER_MESSAGE()));
+            list3.add(new Message(message2.getMESSAGE_ID(), message2.getUSER_NAME(), message2.getUSER_PATRONYMIC(), message2.getUSER_SECONDNAME(), message2.getUSER_ITEM(), message2.getUSER_DATE(), message2.getUSER_MESSAGE()));
         }
 
     }
@@ -202,37 +202,3 @@ public class ControllerListForUser {
         stage.show();
     }
 }
-
-/*
-        listRefreshNews.setOnAction(event -> {
-            DatabaseHandler dbHandler = new DatabaseHandler();
-            Message message = new Message();
-            ResultSet result = dbHandler.refreshMessage(message);
-
-            while (true){
-                try {
-                    if (!result.next()) break;
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    list2.add(new Message(
-                            result.getInt("id"),
-                            result.getString("name"),
-                            result.getString("patronymic"),
-                            result.getString("second_name"),
-                            result.getString("item"),
-                            result.getString("date"),
-                            result.getString("message")
-
-                    ));
-                    listForNews.setItems(list2);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        });
-
-         */

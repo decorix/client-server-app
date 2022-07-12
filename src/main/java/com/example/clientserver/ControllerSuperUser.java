@@ -1,48 +1,36 @@
 package com.example.clientserver;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
-public class ControllerUser {
-    @FXML
-    private Button AddNewsForUser;
+public class ControllerSuperUser {
 
     @FXML
-    private Button DeleteNewsForUser;
+    private Button AddNewsForSuperUser;
 
     @FXML
-    private Button EditNewsForUser;
+    private Button ListNewsForSuperUser;
 
     @FXML
-    private Button ListNewsForUser;
-
-    @FXML
-    private Button NewsForUser;
+    private Button NewsForSuperUser;
 
     @FXML
     void initialize() {
-        NewsForUser.setOnAction(event -> {
-            newScene("news.fxml", NewsForUser);
+        NewsForSuperUser.setOnAction(event -> {
+            newScene("newsForSuperUser.fxml", NewsForSuperUser);
 
         });
-        AddNewsForUser.setOnAction(event -> {
-            newScene("addNews.fxml", AddNewsForUser);
+        AddNewsForSuperUser.setOnAction(event -> {
+            newScene("addNews.fxml", AddNewsForSuperUser);
         });
-        ListNewsForUser.setOnAction(event -> {
-            newScene("listForNews.fxml", ListNewsForUser);
+        ListNewsForSuperUser.setOnAction(event -> {
+            newScene("listForNews.fxml", ListNewsForSuperUser);
         });
     }
     public void newScene(String scene, Button button) {
