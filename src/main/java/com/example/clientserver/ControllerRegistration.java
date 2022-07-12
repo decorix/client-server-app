@@ -2,10 +2,8 @@ package com.example.clientserver;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
